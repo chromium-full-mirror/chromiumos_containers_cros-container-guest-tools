@@ -26,21 +26,25 @@ main() {
         emacs
         firefox-esr
         gedit
+        # For crostini.AppLibreOffice.*
+        fonts-liberation2
         libreoffice
         libreoffice-gtk3
-        docker.io
     )
-
-    local -a packages
-    packages_norecomends=()
 
     if [[ "${release}" != "buster" ]]; then
       # Podman is not available in buster.
-      packages+=(podman)
-
+      # Docker in buster is too old.
       # Installing VLC on buster fails for unclear reasons
       # and we're about to drop support
-      packages_norecomends+=(vlc)
+      packages+=(
+        docker.io
+        vlc
+        # For crostini.Podman*
+        podman
+        fuse-overlayfs
+        slirp4netns
+      )
     fi
 
     # for testing Visual Studio Code.
@@ -50,6 +54,8 @@ main() {
 deb [arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main
 EOF
 
+    apt-get -o Acquire::Retries=3 -q update
+
     if [ "${arch}" = "amd64" ]; then
         # for testing Android Studio.
         wget -q https://storage.googleapis.com/chromiumos-test-assets-public/crostini_test_files/android-studio-linux.tar.gz
@@ -57,6 +63,11 @@ EOF
         rm -f android-studio-linux.tar.gz
 
         # for testing Eclipse.
+        if [[ "${release}" == "bookworm" ]]; then
+          # Workaround for installing JRE on bookworm
+          eatmydata apt-get install -y default-jre-headless
+        fi
+
         packages+=( default-jre )
         wget -q https://storage.googleapis.com/chromiumos-test-assets-public/crostini_test_files/eclipse.tar.gz
         tar -xf eclipse.tar.gz -C /usr/
@@ -68,10 +79,8 @@ EOF
         packages+=( "code=${VSCODE_VERSION_ARM64}" )
     fi
 
-    apt-get -o Acquire::Retries=3 -q update
-    eatmydata apt-get -o Acquire::Retries=3 -q -y install "${packages[@]}"
     eatmydata apt-get -o Acquire::Retries=3 -q -y --no-install-recommends \
-      install "${packages_norecomends[@]}"
+      install "${packages[@]}"
 
     apt-get clean
     rm -rf /var/lib/apt/lists
