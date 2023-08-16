@@ -53,6 +53,7 @@ def update_project(project, path, images, base_url, branch):
     )
     data_dir = os.path.join(project_path, path)
 
+    files = []
     for arch, ctype, release in itertools.product(
         ARCHES, CONTAINER_TYPES, RELEASES
     ):
@@ -68,25 +69,29 @@ def update_project(project, path, images, base_url, branch):
 
         metadata_item = items['lxd.tar.xz']
         metadata_file = f'crostini_{ctype}_container_metadata_{release}_{file_arch}.tar.xz.external'
+        metadata_path = os.path.join(data_dir, metadata_file)
         update_data_file(
             base_url + metadata_item['path'],
-            os.path.join(data_dir, metadata_file),
+            metadata_path,
             metadata_item['size'],
             metadata_item['sha256'],
         )
+        files.append(metadata_path)
 
         rootfs_item = items['rootfs.squashfs']
         rootfs_file = f'crostini_{ctype}_container_rootfs_{release}_{file_arch}.squashfs.external'
+        rootfs_path = os.path.join(data_dir, rootfs_file)
         update_data_file(
             base_url + rootfs_item['path'],
-            os.path.join(data_dir, rootfs_file),
+            rootfs_path,
             rootfs_item['size'],
             rootfs_item['sha256'],
         )
+        files.append(rootfs_path)
 
     if branch:
         print(f'Committing changes for {project}')
-        subprocess.run(['git', 'add', path], cwd=project_path, check=True)
+        subprocess.run(['git', 'add', *files], cwd=project_path, check=True)
         subprocess.run(
             ['git', 'commit', '-m', COMMIT_MSG], cwd=project_path, check=True
         )
