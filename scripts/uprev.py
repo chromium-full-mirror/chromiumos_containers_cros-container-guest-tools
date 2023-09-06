@@ -15,7 +15,7 @@ import urllib.request
 BUCKET_NAME = 'cros-containers-staging'
 ARCHES = ['amd64', 'arm64']
 CONTAINER_TYPES = ['test', 'app_test']
-RELEASES = ['buster', 'bullseye']
+RELEASES = [ 'bullseye']
 PROJECTS = [
     (
         'chromiumos/platform/tast-tests',
