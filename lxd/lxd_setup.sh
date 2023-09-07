@@ -13,9 +13,7 @@ main() {
 
     local cros_staging_list="/etc/apt/sources.list.d/cros-staging.list"
     echo "deb [trusted=yes] file:///run/apt ${release} main" > "${cros_staging_list}"
-    if [[ "${release}" = "buster" ]]; then
-        echo "deb https://deb.debian.org/debian buster-backports main" >> "${cros_staging_list}"
-    elif [[ "${release}" = "bullseye" ]]; then
+    if [[ "${release}" = "bullseye" ]]; then
         echo "deb https://deb.debian.org/debian bullseye-backports main" >> "${cros_staging_list}"
     fi
 

@@ -55,14 +55,6 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "cros-apt-prefs-buster",
-    srcs = ["cros-buster.pref"],
-    mode = "0644",
-    package_dir = "/etc/apt/preferences.d",
-    strip_prefix = "/cros-apt-config",
-)
-
-pkg_tar(
     name = "debian-data-bookworm",
     extension = "tar.gz",
     deps = [
@@ -78,17 +70,6 @@ pkg_tar(
     deps = [
         ":cros-apt-prefs",
         ":cros-apt-prefs-bullseye",
-        ":cros-keyring",
-        ":cros-keyring-new",
-    ],
-)
-
-pkg_tar(
-    name = "debian-data-buster",
-    extension = "tar.gz",
-    deps = [
-        ":cros-apt-prefs",
-        ":cros-apt-prefs-buster",
         ":cros-keyring",
         ":cros-keyring-new",
     ],
@@ -119,20 +100,5 @@ pkg_deb(
     # To maintain a clean upgrade path, the version should sort before the
     # :deb-bookworm versions.
     version = "0.27~cros11",
-    visibility = ["//cros-debs:__pkg__"],
-)
-
-pkg_deb(
-    name = "deb-buster",
-    architecture = "all",
-    data = ":debian-data-buster",
-    description_file = "deb-description",
-    homepage = "https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md",
-    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
-    package = "cros-apt-config",
-    section = "misc",
-    # To maintain a clean upgrade path, the version should sort before the
-    # :deb-bookworm and :deb-bullseye versions.
-    version = "0.27~cros10",
     visibility = ["//cros-debs:__pkg__"],
 )

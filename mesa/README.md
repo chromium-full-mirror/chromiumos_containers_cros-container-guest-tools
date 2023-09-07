@@ -56,10 +56,3 @@ Crostini builds of mesa have a version format such as `21.2.6-1~cros11+1`.
 `21.2.6-1` is the original Debian release that was backported, `~cros11`
 are builds for Debian 11 (bullseye) and `+1` is the first build of this version.
 This is similar to the version format used for Debian backports.
-
-## Additional packages
-
-In addition to `mesa` the following packages are built for Debian buster only:
-- `waffle`
-- `apitrace` - To enable trace-based testing.
-- `glbench`

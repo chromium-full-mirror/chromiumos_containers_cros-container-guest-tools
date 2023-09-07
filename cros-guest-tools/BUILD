@@ -11,6 +11,7 @@ pkg_tar(
 DEPENDS = [
     "cros-garcon",
     "cros-host-fonts",
+    "cros-im",
     "cros-notificationd",
     "cros-sommelier",
     "cros-ui-config",
@@ -22,6 +23,7 @@ RECOMMENDS = [
     "cros-apt-config",
     "cros-gpu",
     "cros-logging",
+    "cros-pipe-config",
     "cros-sommelier-config",
     "cros-sudo-config",
     "cros-systemd-overrides",
@@ -51,14 +53,12 @@ pkg_deb(
     name = "deb-bookworm",
     architecture = "all",
     data = ":debian-data",
-    depends = DEPENDS + ["cros-im"],
+    depends = DEPENDS,
     description_file = "deb-description",
     homepage = "https://chromium.googlesource.com/chromiumos/containers/cros-container-guest-tools/",
     maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
     package = "cros-guest-tools",
-    recommends = RECOMMENDS + [
-        "cros-pipe-config",
-    ],
+    recommends = RECOMMENDS,
     section = "misc",
     version = "0.39",
     visibility = ["//cros-debs:__pkg__"],
@@ -68,32 +68,15 @@ pkg_deb(
     name = "deb-bullseye",
     architecture = "all",
     data = ":debian-data",
-    depends = DEPENDS + ["cros-im"],
-    description_file = "deb-description",
-    homepage = "https://chromium.googlesource.com/chromiumos/containers/cros-container-guest-tools/",
-    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
-    package = "cros-guest-tools",
-    recommends = RECOMMENDS + ["cros-pipe-config"],
-    section = "misc",
-    # To maintain a clean upgrade path, the version should sort before the
-    # :deb-bookworm versions.
-    version = "0.39~cros11",
-    visibility = ["//cros-debs:__pkg__"],
-)
-
-pkg_deb(
-    name = "deb-buster",
-    architecture = "all",
-    data = ":debian-data",
     depends = DEPENDS,
     description_file = "deb-description",
     homepage = "https://chromium.googlesource.com/chromiumos/containers/cros-container-guest-tools/",
     maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
     package = "cros-guest-tools",
-    recommends = RECOMMENDS + ["cros-pulse-config"],
+    recommends = RECOMMENDS,
     section = "misc",
     # To maintain a clean upgrade path, the version should sort before the
-    # :deb-bookworm and :deb-bullseye versions.
-    version = "0.39~cros10",
+    # :deb-bookworm versions.
+    version = "0.39~cros11",
     visibility = ["//cros-debs:__pkg__"],
 )

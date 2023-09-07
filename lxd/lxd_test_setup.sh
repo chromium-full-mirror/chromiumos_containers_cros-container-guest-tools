@@ -9,7 +9,6 @@
 set -eux -o pipefail
 
 main() {
-    local release=$1
     export DEBIAN_FRONTEND=noninteractive
     # Add non-free repository to apt sources.list.
     sed -E -i 's|^(deb.*main)$|\1 non-free|g' /etc/apt/sources.list
@@ -49,12 +48,6 @@ main() {
         dnsutils
     )
 
-    # For graphics.GLBench
-    if [ "${release}" = "buster" ]; then
-        echo "deb [trusted=yes] file:///run/apt ${release} main" > /etc/apt/sources.list.d/cros-mesa.list
-        packages+=( glbench )
-    fi
-
     # For filemanager.SMB.
     echo "samba-common samba-common/workgroup string WORKGROUP" \
       | debconf-set-selections
@@ -66,10 +59,6 @@ main() {
     apt-get -o Acquire::Retries=3 update
     apt-get -o Acquire::Retries=3 -q -y install eatmydata
     eatmydata apt-get -o Acquire::Retries=3 -q -y install "${packages[@]}"
-
-    if [ "${release}" = "buster" ]; then
-        rm /etc/apt/sources.list.d/cros-mesa.list
-    fi
 
     # Disable automatic updates for test images.
     systemctl disable apt-daily.timer apt-daily-upgrade.timer

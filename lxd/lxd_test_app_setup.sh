@@ -23,29 +23,20 @@ main() {
     local -a packages
     packages=(
         audacity
+        docker.io
         emacs
         firefox-esr
         gedit
+        vlc
         # For crostini.AppLibreOffice.*
         fonts-liberation2
         libreoffice
         libreoffice-gtk3
-    )
-
-    if [[ "${release}" != "buster" ]]; then
-      # Podman is not available in buster.
-      # Docker in buster is too old.
-      # Installing VLC on buster fails for unclear reasons
-      # and we're about to drop support
-      packages+=(
-        docker.io
-        vlc
         # For crostini.Podman*
         podman
         fuse-overlayfs
         slirp4netns
-      )
-    fi
+    )
 
     # for testing Visual Studio Code.
     curl -sSL https://packages.microsoft.com/keys/microsoft.asc \

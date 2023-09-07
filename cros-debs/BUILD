@@ -56,17 +56,6 @@ filegroup(
     ],
 )
 
-filegroup(
-    name = "buster-files",
-    srcs = [
-        ":cros-debs-common",
-        "//cros-apt-config:deb-buster",
-        "//cros-gpu-buster:deb",
-        "//cros-guest-tools:deb-buster",
-        "//cros-pulse-config:deb-buster",
-    ],
-)
-
 copy_debs_to_folder(
     name = "bookworm-debs",
     srcs = [":bookworm-files"],
@@ -79,17 +68,10 @@ copy_debs_to_folder(
     out_dir = "bullseye-debs",
 )
 
-copy_debs_to_folder(
-    name = "buster-debs",
-    srcs = [":buster-files"],
-    out_dir = "buster-debs",
-)
-
 filegroup(
     name = "debs",
     srcs = [
         ":bookworm-debs",
         ":bullseye-debs",
-        ":buster-debs",
     ],
 )
