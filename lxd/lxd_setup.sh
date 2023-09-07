@@ -30,10 +30,6 @@ main() {
 
     # Don't run sshd out of the box.
     touch /etc/ssh/sshd_not_to_be_run
-
-    # Add a placeholder cros.list. This will be replaced at boot time by
-    # tremplin.
-    echo "deb https://storage.googleapis.com/cros-packages/74 stretch main"
 }
 
 main "$@"
