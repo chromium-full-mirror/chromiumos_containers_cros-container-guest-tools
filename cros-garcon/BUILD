@@ -103,6 +103,34 @@ pkg_tar(
     ],
 )
 
+# TODO(b/286917197): bookworm-specific hack to work around GTK+3 crashes.
+# Remove this when https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1043000 is
+# fixed.
+pkg_tar(
+    name = "cros-garcon-bookworm",
+    srcs = ["bookworm.conf"],
+    mode = "0644",
+    package_dir = "/usr/lib/systemd/user/cros-garcon.service.d",
+    strip_prefix = "/cros-garcon",
+)
+
+pkg_tar(
+    name = "debian-data-bookworm",
+    extension = "tar.gz",
+    deps = [
+        ":cros-garcon-ansible-integration",
+        ":cros-garcon-bookworm",
+        ":cros-garcon-config",
+        ":cros-garcon-desktop",
+        ":cros-garcon-dpkg-config",
+        ":cros-garcon-etc-skel",
+        ":cros-garcon-polkit",
+        ":cros-garcon-systemd",
+        ":cros-garcon-terminal-handler",
+        ":cros-garcon-url-handler",
+    ],
+)
+
 pkg_deb(
     name = "deb",
     architecture = "all",
@@ -122,6 +150,32 @@ pkg_deb(
     prerm = "prerm",
     provides = ["x-terminal-emulator"],
     section = "misc",
+    # To maintain a clean upgrade path, the version should sort before the
+    # :deb-bookworm versions.
     version = "0.28",
+    visibility = ["//cros-debs:__pkg__"],
+)
+
+pkg_deb(
+    name = "deb-bookworm",
+    architecture = "all",
+    conffiles_file = "conffiles",
+    data = ":debian-data-bookworm",
+    depends = [
+        "desktop-file-utils",
+        "openssh-sftp-server",
+        "packagekit",
+        "polkitd-pkla",
+        "xdg-utils",
+    ],
+    description_file = "deb-description",
+    homepage = "https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/vm_tools/garcon/",
+    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
+    package = "cros-garcon",
+    postinst = "postinst",
+    prerm = "prerm",
+    provides = ["x-terminal-emulator"],
+    section = "misc",
+    version = "0.29~cros12",
     visibility = ["//cros-debs:__pkg__"],
 )

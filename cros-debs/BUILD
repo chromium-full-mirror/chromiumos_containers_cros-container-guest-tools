@@ -9,7 +9,6 @@ filegroup(
     name = "cros-debs-common",
     srcs = [
         "//cros-adapta:deb",
-        "//cros-garcon:deb",
         "//cros-host-fonts:deb",
         "//cros-logging:deb",
         "//cros-notificationd:deb",
@@ -40,6 +39,7 @@ filegroup(
         ":cros-debs-bullseye",
         ":cros-debs-common",
         "//cros-apt-config:deb-bookworm",
+        "//cros-garcon:deb-bookworm",
         "//cros-guest-tools:deb-bookworm",
         "//cros-pulse-config:deb",
     ],
@@ -51,6 +51,7 @@ filegroup(
         ":cros-debs-bullseye",
         ":cros-debs-common",
         "//cros-apt-config:deb-bullseye",
+        "//cros-garcon:deb",
         "//cros-guest-tools:deb-bullseye",
         "//cros-pulse-config:deb",
     ],
