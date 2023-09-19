@@ -9,6 +9,8 @@
 set -eux -o pipefail
 
 main() {
+    local release="$1"
+
     export DEBIAN_FRONTEND=noninteractive
     # Add non-free repository to apt sources.list.
     sed -E -i 's|^(deb.*main)$|\1 non-free|g' /etc/apt/sources.list
@@ -47,6 +49,14 @@ main() {
         # For network.DNSProxy*
         dnsutils
     )
+
+    if [[ "${release}" != bullseye ]]; then
+      packages+=(
+          # For crostini.Toolkit.*.
+          gir1.2-gtk-4.0 # GTK4
+          python3-pyqt6  # Qt6
+      )
+    fi
 
     # For filemanager.SMB.
     echo "samba-common samba-common/workgroup string WORKGROUP" \
