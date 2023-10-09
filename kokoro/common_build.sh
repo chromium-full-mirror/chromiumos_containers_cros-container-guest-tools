@@ -38,6 +38,10 @@ build_mesa_shard() {
         sudo dpkg -i "${KOKORO_GFILE_DIR}/qemu-user-static_ubuntu6.2_amd64.deb"
     fi
 
+    # The debian-archive-keyring in Ubuntu 20.04 is too old.
+    sudo dpkg -i \
+      "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
+
     sudo mkdir /tmpfs/pbuilder
     sudo mount --bind /tmpfs/pbuilder /var/cache/pbuilder
 
@@ -71,19 +75,16 @@ build_cros_im_shard() {
     local src_root="${KOKORO_ARTIFACTS_DIR}"/git/platform2/vm_tools/cros_im
     cd "${src_root}"
 
+    # The debian-archive-keyring in Ubuntu 20.04 is too old.
+    sudo dpkg -i \
+      "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
+
     local releases="bullseye bookworm"
     # pbuilder may not be installed yet, so create both directories.
     sudo mkdir -p /tmpfs/pbuilder /var/cache/pbuilder
     sudo mount --bind /tmpfs/pbuilder /var/cache/pbuilder
 
     for dist in ${releases}; do
-        if [[ "${dist}" == "bookworm" ]]; then
-            # The debian-archive-keyring in Ubuntu 20.04 is too old, install a
-            # newer version for bookworm keys.
-            sudo dpkg -i \
-              "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
-        fi
-
         local cache_url="gs://pbuilder-apt-cache/debian-${dist}-${arch}"
         local cache_dir="/var/cache/pbuilder/debian-${dist}-${arch}/aptcache"
         sudo mkdir -p "${cache_dir}"
