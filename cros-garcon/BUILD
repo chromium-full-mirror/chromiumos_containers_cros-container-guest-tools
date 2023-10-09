@@ -103,34 +103,6 @@ pkg_tar(
     ],
 )
 
-# TODO(b/286917197): bookworm-specific hack to work around GTK+3 crashes.
-# Remove this when https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1043000 is
-# fixed.
-pkg_tar(
-    name = "cros-garcon-bookworm",
-    srcs = ["bookworm.conf"],
-    mode = "0644",
-    package_dir = "/usr/lib/systemd/user/cros-garcon.service.d",
-    strip_prefix = "/cros-garcon",
-)
-
-pkg_tar(
-    name = "debian-data-bookworm",
-    extension = "tar.gz",
-    deps = [
-        ":cros-garcon-ansible-integration",
-        ":cros-garcon-bookworm",
-        ":cros-garcon-config",
-        ":cros-garcon-desktop",
-        ":cros-garcon-dpkg-config",
-        ":cros-garcon-etc-skel",
-        ":cros-garcon-polkit",
-        ":cros-garcon-systemd",
-        ":cros-garcon-terminal-handler",
-        ":cros-garcon-url-handler",
-    ],
-)
-
 pkg_deb(
     name = "deb",
     architecture = "all",
@@ -160,7 +132,7 @@ pkg_deb(
     name = "deb-bookworm",
     architecture = "all",
     conffiles_file = "conffiles",
-    data = ":debian-data-bookworm",
+    data = ":debian-data",
     depends = [
         "desktop-file-utils",
         "openssh-sftp-server",
@@ -176,6 +148,6 @@ pkg_deb(
     prerm = "prerm",
     provides = ["x-terminal-emulator"],
     section = "misc",
-    version = "0.29~cros12",
+    version = "0.29",
     visibility = ["//cros-debs:__pkg__"],
 )
