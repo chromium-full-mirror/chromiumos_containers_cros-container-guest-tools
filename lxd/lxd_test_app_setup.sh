@@ -48,11 +48,6 @@ EOF
     apt-get -o Acquire::Retries=3 -q update
 
     if [ "${arch}" = "amd64" ]; then
-        # for testing Android Studio.
-        wget -q https://storage.googleapis.com/chromiumos-test-assets-public/crostini_test_files/android-studio-linux.tar.gz
-        tar -xf android-studio-linux.tar.gz
-        rm -f android-studio-linux.tar.gz
-
         # for testing Eclipse.
         if [[ "${release}" == "bookworm" ]]; then
           # Workaround for installing JRE on bookworm
