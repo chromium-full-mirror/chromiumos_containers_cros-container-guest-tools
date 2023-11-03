@@ -77,6 +77,19 @@ main() {
       -e 's/(DisableAutomaticSecurityUpdates=)false/\1true/' \
       /etc/skel/.config/cros-garcon.conf
 
+
+    mkdir -p /etc/systemd/system.conf.d
+    cat << EOF > /etc/systemd/system.conf.d/tast.conf
+[Manager]
+DefaultTimeoutStopSec=15s
+EOF
+
+    mkdir -p /etc/systemd/system/user@.service.d
+    cat << EOF > /etc/systemd/system/user@.service.d/tast.conf
+[Service]
+TimeoutStopSec=20s
+EOF
+
     apt-get clean
     rm -rf /var/lib/apt/lists
 }
