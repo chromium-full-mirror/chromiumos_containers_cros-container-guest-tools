@@ -26,6 +26,8 @@ main() {
         lmbench
         # For crostini.DiskIOPerf.
         fio
+        # For crostini.USBShareMassStorage.
+        fuse2fs
         # For crostini.InputLatency.
         xterm
         # For crostini.NetworkPerf.
