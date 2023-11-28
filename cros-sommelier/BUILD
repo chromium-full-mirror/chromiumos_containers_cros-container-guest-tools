@@ -89,6 +89,6 @@ pkg_deb(
         "xkb-data",
     ],
     section = "misc",
-    version = "0.36",
+    version = "0.37",
     visibility = ["//cros-debs:__pkg__"],
 )

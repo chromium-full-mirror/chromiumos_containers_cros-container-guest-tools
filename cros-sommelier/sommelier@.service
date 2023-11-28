@@ -26,6 +26,7 @@ ExecStart=/usr/bin/sommelier \
               --parent \
               --sd-notify="READY=1" \
               --socket=wayland-%i \
+              --stable-scaling \
               /bin/sh -c \
                   "systemctl --user set-environment ${WAYLAND_DISPLAY_VAR}=$${WAYLAND_DISPLAY}; \
                    systemctl --user import-environment SOMMELIER_VERSION"
