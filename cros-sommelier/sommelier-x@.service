@@ -44,6 +44,7 @@ ExecStart=/usr/bin/sommelier \
               --no-exit-with-child \
               --x-auth=${HOME}/.Xauthority \
               --stable-scaling \
+              --enable-xshape \
               /bin/sh -c \
                   "systemctl --user set-environment ${DISPLAY_VAR}=$${DISPLAY}; \
                    systemctl --user set-environment ${XCURSOR_SIZE_VAR}=$${XCURSOR_SIZE}; \
