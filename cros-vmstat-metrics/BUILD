@@ -10,7 +10,7 @@ pkg_tar(
     mode = "0644",
     package_dir = "/usr/lib/systemd/user",
     strip_prefix = "/cros-vmstat-metrics",
-    symlinks = {"./usr/lib/systemd/user/default.target.wants/cros-vmstat-metrics.service": "/usr/lib/systemd/user/cros-vmstat-metrics.service"},
+    symlinks = {"./default.target.wants/cros-vmstat-metrics.service": "/usr/lib/systemd/user/cros-vmstat-metrics.service"},
 )
 
 pkg_tar(

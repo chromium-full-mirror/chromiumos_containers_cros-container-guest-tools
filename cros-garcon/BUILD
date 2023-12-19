@@ -33,7 +33,7 @@ pkg_tar(
     mode = "0644",
     package_dir = "/usr/lib/systemd/user",
     strip_prefix = "/cros-garcon",
-    symlinks = {"./usr/lib/systemd/user/default.target.wants/cros-garcon.service": "/usr/lib/systemd/user/cros-garcon.service"},
+    symlinks = {"./default.target.wants/cros-garcon.service": "/usr/lib/systemd/user/cros-garcon.service"},
 )
 
 pkg_tar(

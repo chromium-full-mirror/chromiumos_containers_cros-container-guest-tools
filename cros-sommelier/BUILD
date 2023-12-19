@@ -9,7 +9,7 @@ pkg_tar(
     package_dir = "/usr/bin",
     strip_prefix = "/cros-sommelier",
     symlinks = {
-        "./usr/bin/sommelier.elf": "/opt/google/cros-containers/bin/sommelier.elf",
+        "./sommelier.elf": "/opt/google/cros-containers/bin/sommelier.elf",
     },
 )
 
