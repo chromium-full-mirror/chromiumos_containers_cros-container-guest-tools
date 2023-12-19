@@ -67,8 +67,8 @@ build_mesa_shard() {
     popd > /dev/null
 }
 
-# Builds the Crostini IME Debian package for a single architecture, for both
-# bookworm and bullseye.
+# Builds the Crostini IME Debian package for a single architecture, for
+# trixie, bookworm and bullseye.
 build_cros_im_shard() {
     [[ $# -eq 1 ]]
     local arch="$1"
@@ -79,7 +79,7 @@ build_cros_im_shard() {
     sudo dpkg -i \
       "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
 
-    local releases="bullseye bookworm"
+    local releases="bullseye bookworm trixie"
     # pbuilder may not be installed yet, so create both directories.
     sudo mkdir -p /tmpfs/pbuilder /var/cache/pbuilder
     sudo mount --bind /tmpfs/pbuilder /var/cache/pbuilder

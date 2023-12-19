@@ -34,6 +34,17 @@ filegroup(
 )
 
 filegroup(
+    name = "trixie-files",
+    srcs = [
+        ":cros-debs-bullseye",
+        ":cros-debs-common",
+        "//cros-apt-config:deb-bookworm",
+        "//cros-garcon:deb-bookworm",
+        "//cros-guest-tools:deb-bookworm",
+    ],
+)
+
+filegroup(
     name = "bookworm-files",
     srcs = [
         ":cros-debs-bullseye",
@@ -58,6 +69,12 @@ filegroup(
 )
 
 copy_debs_to_folder(
+    name = "trixie-debs",
+    srcs = [":trixie-files"],
+    out_dir = "trixie-debs",
+)
+
+copy_debs_to_folder(
     name = "bookworm-debs",
     srcs = [":bookworm-files"],
     out_dir = "bookworm-debs",
@@ -74,5 +91,6 @@ filegroup(
     srcs = [
         ":bookworm-debs",
         ":bullseye-debs",
+        ":trixie-debs",
     ],
 )
