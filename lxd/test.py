@@ -54,6 +54,7 @@ class LxdTestCase(unittest.TestCase):
 
     cls.container_token_file = tempfile.NamedTemporaryFile()
     cls.container_token_file.write(b'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa')
+    os.chmod(cls.container_token_file.name, 0o644)
 
     cls.profile = cls.client.profiles.create(
         cls.TEST_PROFILE,
@@ -128,9 +129,13 @@ class LxdTestCase(unittest.TestCase):
     ])
     self.assertEqual(ret, 0)
 
-    # Execute user commands with su, rather than directly as the user. This
-    # ensures systemd is available (through PAM). However, the services may not
-    # have started up yet, so also wait for the user session boot to complete.
+    ret, _, _ = self.container.execute([
+        'systemctl', 'start', 'user@1000.service',
+    ])
+    self.assertEqual(ret, 0)
+
+    # User services may not have started up yet, so also wait for the user
+    # session boot to complete.
     ret, _, _ = self.container.execute([
         'su', '-c' 'systemctl --user --wait is-system-running', self.TEST_USER,
     ])
@@ -192,9 +197,13 @@ class LxdTestCase(unittest.TestCase):
     ])
     self.assertEqual(ret, 0)
 
-    # Execute user commands with su, rather than directly as the user. This
-    # ensures systemd is available (through PAM). However, the services may not
-    # have started up yet, so also wait for the user session boot to complete.
+    ret, _, _ = self.container.execute([
+        'systemctl', 'start', 'user@1000.service',
+    ])
+    self.assertEqual(ret, 0)
+
+    # User services may not have started up yet, so also wait for the user
+    # session boot to complete.
     ret, _, _ = self.container.execute([
         'su', '-c' 'systemctl --user --wait is-system-running', self.TEST_USER,
     ])
