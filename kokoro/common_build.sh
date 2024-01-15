@@ -34,14 +34,6 @@ build_mesa_shard() {
     local buildresult="${KOKORO_ARTIFACTS_DIR}/${dist}_mesa_debs"
     mkdir -p "${buildresult}"
 
-    if [[ "${arch}" = "arm"* && "$(uname -m)" != "aarch64" ]]; then
-        sudo dpkg -i "${KOKORO_GFILE_DIR}/qemu-user-static_ubuntu6.2_amd64.deb"
-    fi
-
-    # The debian-archive-keyring in Ubuntu 20.04 is too old.
-    sudo dpkg -i \
-      "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
-
     sudo mkdir /tmpfs/pbuilder
     sudo mount --bind /tmpfs/pbuilder /var/cache/pbuilder
 
@@ -74,10 +66,6 @@ build_cros_im_shard() {
     local arch="$1"
     local src_root="${KOKORO_ARTIFACTS_DIR}"/git/platform2/vm_tools/cros_im
     cd "${src_root}"
-
-    # The debian-archive-keyring in Ubuntu 20.04 is too old.
-    sudo dpkg -i \
-      "${KOKORO_GFILE_DIR}/debian-archive-keyring_2023.3ubuntu1_all.deb"
 
     local releases="bullseye bookworm trixie"
     # pbuilder may not be installed yet, so create both directories.
