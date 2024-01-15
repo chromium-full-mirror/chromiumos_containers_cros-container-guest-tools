@@ -159,6 +159,7 @@ def repack_rootfs(output_dir, disk_path):
     # Copy lsb-release and credits into place.
     shutil.copy(str(rootfs_dir / 'etc' / 'lsb-release'), str(output_dir))
     credits_path = rootfs_dir / 'opt/google/chrome/resources/about_os_credits.html'
+    credits_out_path = output_dir / 'about_os_credits.html'
     try:
       shutil.copy(str(credits_path), str(output_dir))
     except FileNotFoundError:
@@ -166,7 +167,7 @@ def repack_rootfs(output_dir, disk_path):
       # file uncompressed for easier handling.
       with gzip.open(credits_path.with_suffix('.html.gz'),
                      'rb') as decompressed:
-        with credits_path.open('wb') as out:
+        with credits_out_path.open('wb') as out:
           shutil.copyfileobj(decompressed, out)
 
     dedupe_hardlinks(rootfs_dir)
