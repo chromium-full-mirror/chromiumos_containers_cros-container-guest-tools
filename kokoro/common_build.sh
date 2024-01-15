@@ -13,7 +13,7 @@ build_guest_tools() {
     cd "${src_root}"
 
     # Build all targets.
-    bazel-5.3.0 build //cros-debs:debs
+    bazel-6.4.0 build //cros-debs:debs
 
     # Copy resulting debs to results directory.
     chmod 644 bazel-bin/cros-debs/*/*.deb
@@ -50,7 +50,7 @@ build_mesa_shard() {
     sudo mkdir -p "${cache_dir}"
     sudo gsutil -m -q rsync "${cache_url}" "${cache_dir}"
 
-    sudo mv "${src_root}/mesa/"{.pbuilder,.pbuilderrc} /root/
+    sudo cp -r "${src_root}/mesa/"{.pbuilder,.pbuilderrc} /root/
     # Backported build dependencies are needed for newer libdrm and mesa.
     # This hack omits them for other builds.
     if [[ "${packages[*]}" != "libdrm mesa" ]]; then
