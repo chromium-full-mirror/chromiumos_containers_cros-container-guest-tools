@@ -130,7 +130,7 @@ def main():
     if args.branch:
         print(
             'Now upload these changes with '
-            + f'"repo upload -b crostini-uprev-{milestone}"'
+            + f'"repo upload --branch crostini-uprev-{milestone}"'
         )
 
 
