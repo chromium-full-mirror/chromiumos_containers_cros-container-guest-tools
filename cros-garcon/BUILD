@@ -124,7 +124,7 @@ pkg_deb(
     section = "misc",
     # To maintain a clean upgrade path, the version should sort before the
     # :deb-bookworm versions.
-    version = "0.28",
+    version = "0.29",
     visibility = ["//cros-debs:__pkg__"],
 )
 
@@ -148,6 +148,6 @@ pkg_deb(
     prerm = "prerm",
     provides = ["x-terminal-emulator"],
     section = "misc",
-    version = "0.29",
+    version = "0.30",
     visibility = ["//cros-debs:__pkg__"],
 )
