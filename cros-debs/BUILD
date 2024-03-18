@@ -12,6 +12,7 @@ filegroup(
         "//cros-host-fonts:deb",
         "//cros-logging:deb",
         "//cros-notificationd:deb",
+        "//cros-port-listener:deb",
         "//cros-sftp:deb",
         "//cros-sommelier:deb",
         "//cros-sommelier-config:deb",
