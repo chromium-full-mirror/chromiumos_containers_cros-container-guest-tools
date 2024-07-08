@@ -61,13 +61,25 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "cros-garcon-polkit",
+    name = "cros-garcon-polkit-pkla",
     srcs = [
         "garcon-packagekit.pkla",
         "garcon-synaptic.pkla",
     ],
     mode = "0644",
     package_dir = "/var/lib/polkit-1/localauthority/50-local.d",
+    strip_prefix = "/cros-garcon",
+)
+
+
+pkg_tar(
+    name = "cros-garcon-polkit",
+    srcs = [
+        "50-garcon-packagekit.rules",
+        "50-garcon-synaptic.rules",
+    ],
+    mode = "0644",
+    package_dir = "/etc/polkit-1/rules.d",
     strip_prefix = "/cros-garcon",
 )
 
@@ -85,6 +97,22 @@ pkg_tar(
     mode = "0644",
     package_dir = "/usr/share/ansible/plugins/callback",
     strip_prefix = "/cros-garcon/third_party",
+)
+
+pkg_tar(
+    name = "debian-data-old",
+    extension = "tar.gz",
+    deps = [
+        ":cros-garcon-ansible-integration",
+        ":cros-garcon-config",
+        ":cros-garcon-desktop",
+        ":cros-garcon-dpkg-config",
+        ":cros-garcon-etc-skel",
+        ":cros-garcon-polkit-pkla",
+        ":cros-garcon-systemd",
+        ":cros-garcon-terminal-handler",
+        ":cros-garcon-url-handler",
+    ],
 )
 
 pkg_tar(
@@ -107,7 +135,7 @@ pkg_deb(
     name = "deb",
     architecture = "all",
     conffiles_file = "conffiles",
-    data = ":debian-data",
+    data = ":debian-data-old",
     depends = [
         "desktop-file-utils",
         "openssh-sftp-server",
@@ -137,7 +165,6 @@ pkg_deb(
         "desktop-file-utils",
         "openssh-sftp-server",
         "packagekit",
-        "polkitd-pkla",
         "xdg-utils",
     ],
     description_file = "deb-description",
@@ -148,6 +175,6 @@ pkg_deb(
     prerm = "prerm",
     provides = ["x-terminal-emulator"],
     section = "misc",
-    version = "0.30",
+    version = "0.31",
     visibility = ["//cros-debs:__pkg__"],
 )
