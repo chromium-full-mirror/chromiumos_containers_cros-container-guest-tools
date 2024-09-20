@@ -11,6 +11,7 @@ filegroup(
         "//cros-adapta:deb",
         "//cros-host-fonts:deb",
         "//cros-logging:deb",
+        "//cros-motd:deb",
         "//cros-notificationd:deb",
         "//cros-port-listener:deb",
         "//cros-sftp:deb",
