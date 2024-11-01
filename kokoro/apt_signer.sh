@@ -16,10 +16,9 @@ main() {
 
     cp -r "${KOKORO_GFILE_DIR}"/apt_unsigned/* "${repo_dir}"
 
-    # 4EB27DB2A3B88B8B - expires 2024-10-25
     # E88979FB9B30ACF2 - expires 2026-02-14
     # 32EE5355A6BC6E42 - expires 2027-01-29
-    local key_ids="4EB27DB2A3B88B8B,E88979FB9B30ACF2,32EE5355A6BC6E42"
+    local key_ids="E88979FB9B30ACF2,32EE5355A6BC6E42"
 
     # Sign the Release file(s).
     local release_file
