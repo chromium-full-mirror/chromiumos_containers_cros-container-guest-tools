@@ -84,7 +84,7 @@ pkg_deb(
     maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
     package = "cros-apt-config",
     section = "misc",
-    version = "0.28",
+    version = "0.29",
     visibility = ["//cros-debs:__pkg__"],
 )
 
@@ -99,6 +99,6 @@ pkg_deb(
     section = "misc",
     # To maintain a clean upgrade path, the version should sort before the
     # :deb-bookworm versions.
-    version = "0.28~cros11",
+    version = "0.29~cros11",
     visibility = ["//cros-debs:__pkg__"],
 )
