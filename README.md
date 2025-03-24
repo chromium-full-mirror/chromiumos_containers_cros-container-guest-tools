@@ -9,7 +9,7 @@ internal continuous integration service.
 The guest packages can be built with Bazel.
 
 ```sh
-bazel build //cros-debs:debs
+bazelisk build //cros-debs:debs
 ```
 
 ## Releasing
