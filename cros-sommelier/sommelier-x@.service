@@ -45,6 +45,7 @@ ExecStart=/usr/bin/sommelier \
               --x-auth=${HOME}/.Xauthority \
               --stable-scaling \
               --enable-xshape \
+              --enable-linux-dmabuf \
               /bin/sh -c \
                   "systemctl --user set-environment ${DISPLAY_VAR}=$${DISPLAY}; \
                    systemctl --user set-environment ${XCURSOR_SIZE_VAR}=$${XCURSOR_SIZE}; \
