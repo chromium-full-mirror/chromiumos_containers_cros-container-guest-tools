@@ -48,7 +48,8 @@ build_containers() {
 
     # build-dir only creates a rootfs, rather than build the LXD image.
     # We pack the image later, so we can re-use the rootfs for each image type.
-    "${DISTROBUILDER}" build-dir "${src_root}/lxd/debian.yaml" "${rootfs}" \
+    TMPDIR=/tmp "${DISTROBUILDER}" build-dir "${src_root}/lxd/debian.yaml" \
+        "${rootfs}" \
         -o "image.architecture=${arch}" \
         -o "image.release=${release}"
 
@@ -136,7 +137,8 @@ build_and_export() {
     local serial
     serial="$(date --utc +%Y%m%d_%H:%M)"
 
-    "${DISTROBUILDER}" pack-lxd "${src_root}/lxd/debian.yaml" "${rootfs}" \
+    TMPDIR=/tmp "${DISTROBUILDER}" pack-lxd "${src_root}/lxd/debian.yaml" \
+        "${rootfs}" \
         -o "packages.update=false" \
         -o "image.architecture=${arch}" \
         -o "image.release=${release}" \
