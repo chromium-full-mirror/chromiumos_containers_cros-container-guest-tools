@@ -13,8 +13,8 @@ main() {
 
     local cros_staging_list="/etc/apt/sources.list.d/cros-staging.list"
     echo "deb [trusted=yes] file:///run/apt ${release} main" > "${cros_staging_list}"
-    if [[ "${release}" = "bullseye" ]]; then
-        echo "deb https://deb.debian.org/debian bullseye-backports main" >> "${cros_staging_list}"
+    if [[ "${release}" = "bookworm" ]]; then
+        echo "deb https://deb.debian.org/debian bookworm-backports main" >> "${cros_staging_list}"
     fi
 
     apt-get -o Acquire::Retries=3 update

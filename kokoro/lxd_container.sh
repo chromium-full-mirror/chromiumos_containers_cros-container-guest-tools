@@ -27,7 +27,9 @@ install_deps() {
     sha256sum --check <<< "${DISTROBUILDER_SHA256SUM}  ${DISTROBUILDER_ARCHIVE}"
     tar xf "${DISTROBUILDER_ARCHIVE}"
     cd "$(basename -s .tar.gz "${DISTROBUILDER_ARCHIVE}")"
-    make
+    sudo apt-get update
+    sudo apt-get install -y brz
+    make GOVCS=public:all,private:all
     # Copy the distrobuilder binary from the user's GOPATH to a system location.
     sudo install "${GOPATH}/bin/distrobuilder" /usr/local/bin/distrobuilder
     popd
