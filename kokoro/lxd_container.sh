@@ -5,8 +5,8 @@
 
 set -ex -o pipefail
 
-DISTROBUILDER_ARCHIVE="distrobuilder-2.0.tar.gz"
-DISTROBUILDER_SHA256SUM="9ddd9b13cbfc61b75ba8d2393df5b11be420145908f36aad7e47d464e8809147"
+DISTROBUILDER_ARCHIVE="distrobuilder-2.1.tar.gz"
+DISTROBUILDER_SHA256SUM="b0446b7d4474f771e2855df905c4331d29d8be5812e19db5daa6f951efd20832"
 
 . "$(dirname "$0")/common.sh" || exit 1
 
@@ -27,9 +27,7 @@ install_deps() {
     sha256sum --check <<< "${DISTROBUILDER_SHA256SUM}  ${DISTROBUILDER_ARCHIVE}"
     tar xf "${DISTROBUILDER_ARCHIVE}"
     cd "$(basename -s .tar.gz "${DISTROBUILDER_ARCHIVE}")"
-    sudo apt-get update
-    sudo apt-get install -y brz
-    make GOVCS=public:all,private:all
+    make
     # Copy the distrobuilder binary from the user's GOPATH to a system location.
     sudo install "${GOPATH}/bin/distrobuilder" /usr/local/bin/distrobuilder
     popd
