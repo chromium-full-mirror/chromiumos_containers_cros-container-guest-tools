@@ -237,7 +237,7 @@ def repack_rootfs(output_dir, disk_path):
         tools_dir = rootfs_dir / "opt" / "google" / "cros-containers"
         if tools_dir.exists():
             # Add new etc dir for lsb-release file
-            (tools_dir / "etc").mkdir()
+            (tools_dir / "etc").mkdir(exist_ok=True)
             shutil.copy(
                 str(rootfs_dir / "etc" / "lsb-release"), str(tools_dir / "etc")
             )
