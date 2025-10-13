@@ -8,6 +8,7 @@ load(":copy_debs.bzl", "copy_debs_to_folder")
 filegroup(
     name = "cros-debs-common",
     srcs = [
+        "//baguette-motd:deb",
         "//cros-adapta:deb",
         "//cros-host-fonts:deb",
         "//cros-logging:deb",
