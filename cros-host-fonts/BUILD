@@ -25,6 +25,9 @@ pkg_deb(
     name = "deb",
     architecture = "all",
     data = ":debian-data",
+    depends = [
+        "fontconfig",
+    ],
     description_file = "deb-description",
     homepage = "https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md",
     maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
@@ -42,6 +45,6 @@ pkg_deb(
         "fonts-roboto-unhinted",
     ],
     section = "misc",
-    version = "0.5",
+    version = "0.6",
     visibility = ["//cros-debs:__pkg__"],
 )
