@@ -7,17 +7,17 @@
 print_message() {
     cat <<-END
 NOTICE:
-    To provide a more stable graphical user experience in Crostini,
-    the GPU-based rendering driver (virgl) has been disabled by default
-    for existing and new environments in ChromeOS version 131 and newer.
+    Recently it has become necessary to deprecate some features of crostini,
+    including:
+      * UI-based installation of .deb packages. Installation via aptitude is
+        the default path, but there are also visual package managers which
+        may be used.
+      * UI-based Debian release upgrade. Please refer to release notes for
+        the release in question for upgrade instructions.
+      * Multi-container support.
 
-    OpenGL and OpenGLES applications will continue to function using a
-    CPU-based rendering driver (swrast).
-
-    If you would like to re-enable GPU-based rendering in an unsupported
-    capacity, you may visit:  chrome://flags#crostini-gpu-support
-    in your Chrome browser and set the flag to "Enabled", then restart
-    your device.
+    For the most up-to-date news, please visit
+    https://developers.google.com/chromeos/app-development/develop/news
 
 END
 }
@@ -26,8 +26,8 @@ deliver_motd() {
     # don't display in ssh-controlled shell
     [[ -n "${SSH_TTY:-}" ]] && return 0
 
-    local COUNTER_INITIAL=0
-    local COUNTER_MAX=5
+    local COUNTER_INITIAL=5
+    local COUNTER_MAX=10
     local user_data=${XDG_DATA_DIR:-"${HOME}/.local/share"}
     local motd_file="$user_data/cros-motd"
 
