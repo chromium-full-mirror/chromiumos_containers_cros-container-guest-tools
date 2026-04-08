@@ -11,6 +11,7 @@ pkg_tar(
 DEPENDS = [
     "cros-garcon",
     "cros-host-fonts",
+    "cros-im",
     "cros-motd",
     "cros-notificationd",
     "cros-sommelier",
@@ -60,7 +61,7 @@ pkg_deb(
     package = "cros-guest-tools",
     recommends = RECOMMENDS,
     section = "misc",
-    version = "0.41",
+    version = "0.40",
     visibility = ["//cros-debs:__pkg__"],
 )
 
@@ -77,6 +78,6 @@ pkg_deb(
     section = "misc",
     # To maintain a clean upgrade path, the version should sort before the
     # :deb-bookworm versions.
-    version = "0.41~cros11",
+    version = "0.40~cros11",
     visibility = ["//cros-debs:__pkg__"],
 )
