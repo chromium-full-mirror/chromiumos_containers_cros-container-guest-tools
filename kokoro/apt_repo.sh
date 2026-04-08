@@ -33,11 +33,29 @@ Description: CrOS containers guest tools
         echo "${distributions}" >> "${repo_dir}/conf/distributions"
 
         local deb_dirs=("${release}-debs" \
-            "${release}_mesa_debs" \
-            "${release}_cros_im_debs")
+            "${release}_mesa_debs")
+         local im_deb_dirs=("${release}_cros_im_debs")
 
         for subdir in "${deb_dirs[@]}"; do
             local debdir="${KOKORO_GFILE_DIR}"/"${subdir}"
+            if [ -d "${debdir}" ]; then
+                pushd "${debdir}" > /dev/null
+                # Note: the maximum total length of command line arguments is
+                # in practice limited to 1/4 the stack size, which is typically
+                # 8 MiB. The names of all the debs should be well under this
+                # size.
+                reprepro -b "${repo_dir}" includedeb "${release}" ./*.deb
+                popd > /dev/null
+            fi
+        done
+        for subdir in "${im_deb_dirs[@]}"; do
+            local release_subdir="${subdir}"
+            # Currently cros_im does not build trixie artifacts, fall back to
+            # using bookworm ones.
+            if [ "${release}" == "trixie" ]; then
+                release_subdir="${subdir/trixie/bookworm}"
+            fi
+            local debdir="${KOKORO_GFILE_DIR}"/"${release_subdir}"
             if [ -d "${debdir}" ]; then
                 pushd "${debdir}" > /dev/null
                 # Note: the maximum total length of command line arguments is
