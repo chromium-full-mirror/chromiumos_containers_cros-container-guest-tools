@@ -18,7 +18,8 @@ main() {
 
     # 32EE5355A6BC6E42 - expires 2027-01-29
     # FD533C07C264648F - expires 2028-01-07
-    local key_ids="32EE5355A6BC6E42,FD533C07C264648F"
+    # 1D09C015006FEAB8 - expires 2029-03-09
+    local key_ids="32EE5355A6BC6E42,FD533C07C264648F,1D09C015006FEAB8"
 
     # Sign the Release file(s).
     local release_file
