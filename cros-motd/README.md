@@ -15,5 +15,5 @@ To specify the number of presentations before the message silences itself, set t
 
 To update the message and ensure that it will be shown for users that have already seen and silenced a
 previous message, increment the package version in the `deb-description` file, update the `COUNTER_INITIAL`
-and `COUNTER_MAX` constants such that they are both greater-than or equal to the prevous version's
+and `COUNTER_MAX` constants such that they are both greater-than or equal to the previous version's
 `COUNTER_MAX`, rebuild the package, and ensure it is included in the next container uprev.

@@ -11,7 +11,7 @@ NOTICE:
     by default to a containerless design for new environments starting in
     ChromeOS version 143 and newer.
 
-    If you experience unexptected issues with the new design, please report
+    If you experience unexpected issues with the new design, please report
     them using the instructions available at
     https://www.chromium.org/chromium-os/developer-library/guides/bugs/platform-public-tracker/.
 

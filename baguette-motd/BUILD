@@ -33,6 +33,6 @@ pkg_deb(
     package = "baguette-motd",
     recommends = [],
     section = "misc",
-    version = "1.2",
+    version = "1.3",
     visibility = ["//cros-debs:__pkg__"],
 )

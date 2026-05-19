@@ -33,6 +33,6 @@ pkg_deb(
     package = "cros-motd",
     recommends = [],
     section = "misc",
-    version = "1.3",
+    version = "1.4",
     visibility = ["//cros-debs:__pkg__"],
 )
