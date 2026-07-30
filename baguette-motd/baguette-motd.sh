@@ -20,6 +20,13 @@ NOTICE:
     the flag to "Disabled", then restart your device, and un- and reinstall
     Crostini.
 
+    PSA: In order to mitigate the Januscape kernel exploit (see:
+    https://github.com/V4bel/Januscape), nested virtualization has been
+    disabled for host kernel versions 5.10 and 5.15. To check your host
+    kernel version, you can navigate to chrome://system, find the entry named
+    'uname', and if it looks something like 'Linux localhost 5.10.XXXX' or
+    'Linux localhost 5.15.XXX' nested virtualization will be disabled
+
 END
 }
 
@@ -27,8 +34,8 @@ deliver_motd() {
     # don't display in ssh-controlled shell
     [[ -n "${SSH_TTY:-}" ]] && return 0
 
-    local COUNTER_INITIAL=0
-    local COUNTER_MAX=5
+    local COUNTER_INITIAL=5
+    local COUNTER_MAX=10
     local user_data=${XDG_DATA_DIR:-"${HOME}/.local/share"}
     local motd_file="$user_data/baguette-motd"
 
