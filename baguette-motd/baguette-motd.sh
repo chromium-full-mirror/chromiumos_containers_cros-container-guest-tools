@@ -34,13 +34,19 @@ deliver_motd() {
     # don't display in ssh-controlled shell
     [[ -n "${SSH_TTY:-}" ]] && return 0
 
-    local COUNTER_INITIAL=5
-    local COUNTER_MAX=10
+    local COUNTER_INITIAL=10
+    local COUNTER_MAX=15
     local user_data=${XDG_DATA_DIR:-"${HOME}/.local/share"}
     local motd_file="$user_data/baguette-motd"
+    local suppress_file="$user_data/baguette-motd.disable"
 
     # ensure exists
     mkdir -p "$user_data" 2>/dev/null || return 1
+
+    # if suppression file exists, bail early. mostly used for tast
+    if [[ -f "$suppress_file" ]]; then
+      return
+    fi
 
     local counter=-1
     if [[ -f "$motd_file" ]]; then
