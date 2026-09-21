@@ -14,6 +14,7 @@ filegroup(
         "//cros-logging:deb",
         "//cros-motd:deb",
         "//cros-notificationd:deb",
+        "//cros-pipe-config:deb",
         "//cros-port-listener:deb",
         "//cros-sftp:deb",
         "//cros-sommelier:deb",
@@ -24,14 +25,6 @@ filegroup(
         "//cros-ui-config:deb",
         "//cros-vmstat-metrics:deb",
         "//cros-wayland:deb",
-    ],
-)
-
-# Packages introduced in bullseye
-filegroup(
-    name = "cros-debs-bullseye",
-    srcs = [
-        "//cros-pipe-config:deb",
         "//cros-xdg-desktop-portal:deb",
     ],
 )
@@ -39,7 +32,6 @@ filegroup(
 filegroup(
     name = "trixie-files",
     srcs = [
-        ":cros-debs-bullseye",
         ":cros-debs-common",
         "//cros-apt-config:deb-bookworm",
         "//cros-garcon:deb-bookworm",
@@ -50,23 +42,10 @@ filegroup(
 filegroup(
     name = "bookworm-files",
     srcs = [
-        ":cros-debs-bullseye",
         ":cros-debs-common",
         "//cros-apt-config:deb-bookworm",
         "//cros-garcon:deb-bookworm",
         "//cros-guest-tools:deb-bookworm",
-        "//cros-pulse-config:deb",
-    ],
-)
-
-filegroup(
-    name = "bullseye-files",
-    srcs = [
-        ":cros-debs-bullseye",
-        ":cros-debs-common",
-        "//cros-apt-config:deb-bullseye",
-        "//cros-garcon:deb",
-        "//cros-guest-tools:deb-bullseye",
         "//cros-pulse-config:deb",
     ],
 )
@@ -83,17 +62,10 @@ copy_debs_to_folder(
     out_dir = "bookworm-debs",
 )
 
-copy_debs_to_folder(
-    name = "bullseye-debs",
-    srcs = [":bullseye-files"],
-    out_dir = "bullseye-debs",
-)
-
 filegroup(
     name = "debs",
     srcs = [
         ":bookworm-debs",
-        ":bullseye-debs",
         ":trixie-debs",
     ],
 )

@@ -16,8 +16,9 @@ main() {
     local repo_dir="${src_root}"/apt_unsigned
     mkdir -p "${repo_dir}"/{,conf}
 
-    # We keep deprecated versions here indefinitely so "apt update" will pull
-    # down an empty repo instead of getting a hard 404 error.
+    # We keep deprecated versions (stretch, buster, bullseye) here indefinitely
+    # so "apt update" will pull down an empty repo instead of getting a hard 404
+    # error; packages and repository metadata are retained for compatibility.
     for release in stretch buster bullseye bookworm trixie; do
         local distributions="
 Origin: Google

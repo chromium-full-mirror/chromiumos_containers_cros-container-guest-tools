@@ -60,14 +60,14 @@ build_mesa_shard() {
 }
 
 # Builds the Crostini IME Debian package for a single architecture, for
-# trixie, bookworm and bullseye.
+# trixie and bookworm.
 build_cros_im_shard() {
     [[ $# -eq 1 ]]
     local arch="$1"
     local src_root="${KOKORO_ARTIFACTS_DIR}"/git/platform2/vm_tools/cros_im
     cd "${src_root}"
 
-    local releases="bullseye bookworm trixie"
+    local releases="bookworm trixie"
     # pbuilder may not be installed yet, so create both directories.
     sudo mkdir -p /tmpfs/pbuilder /var/cache/pbuilder
     sudo mount --bind /tmpfs/pbuilder /var/cache/pbuilder

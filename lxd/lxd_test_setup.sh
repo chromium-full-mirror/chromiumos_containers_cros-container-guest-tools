@@ -52,13 +52,11 @@ main() {
         dnsutils
     )
 
-    if [[ "${release}" != bullseye ]]; then
-      packages+=(
-          # For crostini.Toolkit.*.
-          gir1.2-gtk-4.0 # GTK4
-          python3-pyqt6  # Qt6
-      )
-    fi
+    packages+=(
+        # For crostini.Toolkit.*.
+        gir1.2-gtk-4.0 # GTK4
+        python3-pyqt6  # Qt6
+    )
 
     # For filemanager.SMB.
     echo "samba-common samba-common/workgroup string WORKGROUP" \

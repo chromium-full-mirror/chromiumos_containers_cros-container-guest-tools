@@ -15,8 +15,6 @@ main() {
     echo "deb [trusted=yes] file:///run/apt ${release} main" > "${cros_staging_list}"
     if [[ "${release}" = "bookworm" ]]; then
         echo "deb https://deb.debian.org/debian bookworm-backports main" >> "${cros_staging_list}"
-    elif [[ "${release}" = "bullseye" ]]; then
-        echo "deb https://archive.debian.org/debian bullseye-backports main" >> "${cros_staging_list}"
     fi
 
     apt-get -o Acquire::Retries=3 update

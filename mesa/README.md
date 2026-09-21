@@ -1,5 +1,10 @@
 # mesa
 
+## NOTES
+
+This process is now considered deprecated, as bookworm and above ship with
+modern releases of mesa (and libdrm) so this is no longer required.
+
 ## Overview
 
 These are the scripts used to build mesa-related Debian packages for Crostini.

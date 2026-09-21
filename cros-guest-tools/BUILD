@@ -64,20 +64,3 @@ pkg_deb(
     version = "0.40",
     visibility = ["//cros-debs:__pkg__"],
 )
-
-pkg_deb(
-    name = "deb-bullseye",
-    architecture = "all",
-    data = ":debian-data",
-    depends = DEPENDS,
-    description_file = "deb-description",
-    homepage = "https://chromium.googlesource.com/chromiumos/containers/cros-container-guest-tools/",
-    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
-    package = "cros-guest-tools",
-    recommends = RECOMMENDS,
-    section = "misc",
-    # To maintain a clean upgrade path, the version should sort before the
-    # :deb-bookworm versions.
-    version = "0.40~cros11",
-    visibility = ["//cros-debs:__pkg__"],
-)
