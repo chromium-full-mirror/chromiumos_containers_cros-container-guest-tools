@@ -18,6 +18,23 @@ pkg_tar(
 )
 
 pkg_deb(
+    name = "deb-forky",
+    architecture = "all",
+    data = ":debian-data",
+    depends = [
+        "libgtk-3-0",
+        "qt5-gtk-platformtheme",
+    ],
+    description_file = "deb-description",
+    homepage = "https://chromium.googlesource.com/chromiumos/third_party/cros-adapta/",
+    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
+    package = "cros-adapta",
+    section = "misc",
+    version = "0.6",
+    visibility = ["//cros-debs:__pkg__"],
+)
+
+pkg_deb(
     name = "deb",
     architecture = "all",
     data = ":debian-data",
@@ -33,6 +50,8 @@ pkg_deb(
     maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
     package = "cros-adapta",
     section = "misc",
+    # To maintain a clean upgrade path, the version should sort before the
+    # :deb-forky versions.
     version = "0.5",
     visibility = ["//cros-debs:__pkg__"],
 )

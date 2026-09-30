@@ -19,7 +19,7 @@ main() {
     # We keep deprecated versions (stretch, buster, bullseye) here indefinitely
     # so "apt update" will pull down an empty repo instead of getting a hard 404
     # error; packages and repository metadata are retained for compatibility.
-    for release in stretch buster bullseye bookworm trixie; do
+    for release in stretch buster bullseye bookworm trixie forky; do
         local distributions="
 Origin: Google
 Label: cros-containers

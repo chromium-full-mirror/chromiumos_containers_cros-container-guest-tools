@@ -11,7 +11,6 @@ pkg_tar(
 DEPENDS = [
     "cros-garcon",
     "cros-host-fonts",
-    "cros-im",
     "cros-motd",
     "cros-notificationd",
     "cros-sommelier",
@@ -22,7 +21,6 @@ RECOMMENDS = [
     "bash-completion",
     "bzip2",
     "cros-apt-config",
-    "cros-gpu",
     "cros-logging",
     "cros-pipe-config",
     "cros-sommelier-config",
@@ -51,7 +49,7 @@ RECOMMENDS = [
 ]
 
 pkg_deb(
-    name = "deb-bookworm",
+    name = "deb-forky",
     architecture = "all",
     data = ":debian-data",
     depends = DEPENDS,
@@ -61,6 +59,23 @@ pkg_deb(
     package = "cros-guest-tools",
     recommends = RECOMMENDS,
     section = "misc",
+    version = "0.41",
+    visibility = ["//cros-debs:__pkg__"],
+)
+
+pkg_deb(
+    name = "deb-bookworm",
+    architecture = "all",
+    data = ":debian-data",
+    depends = DEPENDS + ["cros-im"],
+    description_file = "deb-description",
+    homepage = "https://chromium.googlesource.com/chromiumos/containers/cros-container-guest-tools/",
+    maintainer = "The ChromiumOS Authors <chromium-os-dev@chromium.org>",
+    package = "cros-guest-tools",
+    recommends = RECOMMENDS + ["cros-gpu"],
+    section = "misc",
+    # To maintain a clean upgrade path, the version should sort before the
+    # :deb-forky versions.
     version = "0.40",
     visibility = ["//cros-debs:__pkg__"],
 )
