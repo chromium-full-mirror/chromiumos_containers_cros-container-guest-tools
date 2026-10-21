@@ -8,7 +8,7 @@ genrule(
     name = "skel-config",
     srcs = ["skel.cros-garcon.conf"],
     outs = [".config/cros-garcon.conf"],
-    cmd = "mv $(location skel.cros-garcon.conf) $@",
+    cmd = "mv $(execpath skel.cros-garcon.conf) $@",
 )
 
 pkg_tar(
@@ -70,7 +70,6 @@ pkg_tar(
     package_dir = "/var/lib/polkit-1/localauthority/50-local.d",
     strip_prefix = "/cros-garcon",
 )
-
 
 pkg_tar(
     name = "cros-garcon-polkit",
@@ -142,7 +141,7 @@ pkg_deb(
     section = "misc",
     # To maintain a clean upgrade path, the version should sort before the
     # :deb-bookworm versions.
-    version = "0.29",
+    version = "0.30",
     visibility = ["//cros-debs:__pkg__"],
 )
 
@@ -165,6 +164,6 @@ pkg_deb(
     prerm = "prerm",
     provides = ["x-terminal-emulator"],
     section = "misc",
-    version = "0.32",
+    version = "0.33",
     visibility = ["//cros-debs:__pkg__"],
 )
